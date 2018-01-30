@@ -1,2 +1,2 @@
 # SimpleSplashScreen
-Provide a simple open animation (use of demo)
+Provide a simple splash screen animation (use of demo)
