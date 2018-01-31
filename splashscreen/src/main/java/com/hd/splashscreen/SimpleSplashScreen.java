@@ -180,7 +180,8 @@ public class SimpleSplashScreen extends LinearLayout {
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    if(config.getCallback()!=null)config.getCallback().loadFinish();
+                    if (config.getCallback() != null)
+                        config.getCallback().loadFinish();
                 }
 
                 @Override
