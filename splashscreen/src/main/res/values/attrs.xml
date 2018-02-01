@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="background_video_style">
+        <attr name="controlPlay" format="boolean" />
+        <attr name="loopPlay" format="boolean" />
+        <attr name="mute" format="boolean" />
+    </declare-styleable>
+</resources>

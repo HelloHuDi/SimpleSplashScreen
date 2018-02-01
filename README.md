@@ -2,12 +2,12 @@
 
 ## Provide a simple splash screen animation (use of demo)
 
-<img src="screen.gif" width="300px" height="400px"/>
+<img src="art/text_screen.gif" width="250px" height="500px"/> <img src="art/video_screen.gif" width="250px" height="500px"/>
 
 ## dependencies
 
 ```
-compile 'com.hd.splashscreen:splashscreen:1.2'
+compile 'com.hd.splashscreen:splashscreen:1.3'
 ```
 
 ## in layout xml:
