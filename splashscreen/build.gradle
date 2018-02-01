@@ -6,7 +6,7 @@ def siteUrl = 'https://github.com/HelloHuDi/SimpleSplashScreen'
 def gitUrl = 'git@github.com:HelloHuDi/SimpleSplashScreen.git'
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-version = "1.0"
+version = "1.2"
 group = "com.hd.splashscreen"
 
 android {
@@ -14,8 +14,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 12
+        versionName "1.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

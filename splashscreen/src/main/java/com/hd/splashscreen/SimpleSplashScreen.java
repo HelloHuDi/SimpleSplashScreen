@@ -9,7 +9,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
-import android.os.SystemClock;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -71,7 +71,7 @@ public class SimpleSplashScreen extends LinearLayout {
     private void init() {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.simple_splash_screen_layout, this);
         linContent = rootView.findViewById(R.id.linContent);
-        linContent.setOrientation(LinearLayout.HORIZONTAL);
+        linContent.setOrientation(getOrientation());
         linContent.setGravity(Gravity.CENTER);
     }
 
@@ -97,11 +97,9 @@ public class SimpleSplashScreen extends LinearLayout {
             viewList.get(0).post(new Runnable() {
                 @Override
                 public void run() {
-                    for (View view : viewList) {
+                    for (final View view : viewList) {
                         if (!(view instanceof TextView)) {
-                            if (config.getIconDelayTime() > 0)
-                                SystemClock.sleep(config.getIconDelayTime());
-                            startViewInAnim(view);
+                            startLastView(view);
                         } else {
                             startViewInAnim(view);
                         }
@@ -111,7 +109,21 @@ public class SimpleSplashScreen extends LinearLayout {
         }
     }
 
+    private void startLastView(final View view) {
+        if (config.getIconDelayTime() > 0) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startViewInAnim(view);
+                }
+            }, config.getIconDelayTime());
+        }else{
+            startViewInAnim(view);
+        }
+    }
+
     private void addContentView(View view) {
+        view.setVisibility(View.INVISIBLE);
         viewList.add(view);
         linContent.addView(view);
         view.setTag("tag");
@@ -126,7 +138,6 @@ public class SimpleSplashScreen extends LinearLayout {
         textView.setTextColor(config.getTextColor() > 0 ? getContext().getResources().getColor(config.getTextColor()) : Color.BLACK);
         textView.setTextSize(config.getTextSize() > 0 ? config.getTextSize() : defaultTextSize);
         textView.setText(str);
-        textView.setVisibility(View.INVISIBLE);
         return textView;
     }
 
@@ -134,17 +145,19 @@ public class SimpleSplashScreen extends LinearLayout {
     @NonNull
     private View createIconView(final View view) {
         final float textSize = config.getTextSize() > 0 ? config.getTextSize() : defaultTextSize;
-        final float iconSize = textSize * 0.8f;
+        final float iconSize = textSize*config.getIconSize();
         final ImageView imageView = new ImageView(getContext());
         imageView.setImageResource(config.getIconId());
-        imageView.setVisibility(View.INVISIBLE);
         final LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams((int) iconSize, (int) iconSize);
-        final Rect viewRect = new Rect();
+        imageView.setLayoutParams(imageParams);
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                view.getGlobalVisibleRect(viewRect);
-                imageParams.topMargin = (int) iconSize;
+                Rect rect1 = new Rect();
+                Rect rect2 = new Rect();
+                view.getGlobalVisibleRect(rect1);
+                imageView.getGlobalVisibleRect(rect2);
+                imageParams.topMargin = (rect1.bottom-rect2.bottom)/2;
                 imageParams.width = (int) iconSize;
                 imageParams.height = (int) iconSize;
                 imageView.setLayoutParams(imageParams);
@@ -168,7 +181,7 @@ public class SimpleSplashScreen extends LinearLayout {
         ValueAnimator scaleY = ObjectAnimator.ofFloat(v, "scaleY", s, 1.0f);
         ValueAnimator alpha = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1.0f);
         AnimatorSet set = new AnimatorSet();
-        set.setDuration(1800);
+        set.setDuration(config.getAnimationDuration());
         set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.playTogether(tranX, tranY, scaleX, scaleY, alpha);
         if (tag.equals(v.getTag()))

@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hd.splashscreen.SimpleSplashScreen
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/simpleSplashScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hd.simplesplashscreen.demo.MainActivity"/>
+    tools:context="com.hd.simplesplashscreen.demo.MainActivity">
+
+    <com.hd.splashscreen.SimpleSplashScreen
+        android:id="@+id/horizontalScreen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"/>
+
+    <com.hd.splashscreen.SimpleSplashScreen
+        android:id="@+id/verticalScreen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"/>
+</LinearLayout>

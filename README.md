@@ -7,7 +7,7 @@
 ## dependencies
 
 ```
-compile 'com.hd.splashscreen:splashscreen:1.0'
+compile 'com.hd.splashscreen:splashscreen:1.2'
 ```
 
 ## in layout xml:
@@ -22,24 +22,25 @@ compile 'com.hd.splashscreen:splashscreen:1.0'
 ## in code:
 
 ```
-override fun onResume() {
-    super.onResume()
-    simpleSplashScreen.addConfig(getSimpleConfig(25f))
-    simpleSplashScreen.start()
-}
+ override fun onResume() {
+        super.onResume()
+        simpleSplashScreen.addConfig(getSimpleConfig(25f))
+        simpleSplashScreen.start()
+    }
 
-private fun getSimpleConfig(size:Float=30f): SimpleConfig {
-    val simpleConfig = SimpleConfig()
-    simpleConfig.text = "SIMPLESPLASHSCREEN"
-    simpleConfig.textColor = R.color.colorAccent
-    simpleConfig.textSize = size
-    simpleConfig.iconId = R.mipmap.ic_launcher
-    simpleConfig.iconDelayTime=800
-    simpleConfig.callback=this
-    return simpleConfig
-}
+    private fun getSimpleConfig(size:Float=30f): SimpleConfig {
+        val simpleConfig = SimpleConfig()
+        simpleConfig.text = "SIMPLESPLASHSCREEN"
+        simpleConfig.textColor = R.color.colorAccent
+        simpleConfig.textSize = size
+        simpleConfig.iconId = R.mipmap.ic_launcher
+        simpleConfig.iconDelayTime=800
+        simpleConfig.iconSize=0.7f
+        simpleConfig.callback=this
+        return simpleConfig
+    }
 
-override fun loadFinish() {
-       Toast.makeText(this,"load completed",Toast.LENGTH_SHORT).show()
-   }
+    override fun loadFinish() {
+        Toast.makeText(this,"load completed",Toast.LENGTH_SHORT).show()
+    }
 ```

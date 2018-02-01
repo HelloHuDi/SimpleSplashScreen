@@ -16,8 +16,10 @@ class MainActivity : AppCompatActivity(), SimpleSplashFinishCallback {
 
     override fun onResume() {
         super.onResume()
-        simpleSplashScreen.addConfig(getSimpleConfig(25f))
-        simpleSplashScreen.start()
+        horizontalScreen.addConfig(getSimpleConfig(20f))
+        horizontalScreen.start()
+        verticalScreen.addConfig(getSimpleConfig(10f))
+        verticalScreen.start()
     }
 
     private fun getSimpleConfig(size:Float=30f): SimpleConfig {
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity(), SimpleSplashFinishCallback {
         simpleConfig.textSize = size
         simpleConfig.iconId = R.mipmap.ic_launcher
         simpleConfig.iconDelayTime=800
+        simpleConfig.iconSize=0.7f
         simpleConfig.callback=this
         return simpleConfig
     }
