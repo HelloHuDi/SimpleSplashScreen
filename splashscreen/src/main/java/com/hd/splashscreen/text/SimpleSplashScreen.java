@@ -1,4 +1,4 @@
-package com.hd.splashscreen;
+package com.hd.splashscreen.text;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -6,7 +6,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
@@ -22,6 +21,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.hd.splashscreen.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class SimpleSplashScreen extends LinearLayout {
         linContent = rootView.findViewById(R.id.linContent);
         linContent.setOrientation(getOrientation());
         linContent.setGravity(Gravity.CENTER);
+        addConfig(new SimpleConfig(getContext()));
     }
 
     public void addConfig(@NonNull SimpleConfig config) {
@@ -90,7 +92,7 @@ public class SimpleSplashScreen extends LinearLayout {
                 String str = ((Character) text.charAt(index)).toString();
                 addContentView(createTextView(str));
             }
-            if (config.getIconId() > 0) {
+            if (config.getIcon()!=null) {
                 addContentView(createIconView(viewList.get(viewList.size() - 1)));
             }
             viewList.get(viewList.size() - 1).setTag(tag);
@@ -135,7 +137,7 @@ public class SimpleSplashScreen extends LinearLayout {
         TextView textView = new TextView(getContext());
         textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(config.getTextColor() > 0 ? getContext().getResources().getColor(config.getTextColor()) : Color.BLACK);
+        textView.setTextColor(config.getTextColor());
         textView.setTextSize(config.getTextSize() > 0 ? config.getTextSize() : defaultTextSize);
         textView.setText(str);
         return textView;
@@ -147,7 +149,7 @@ public class SimpleSplashScreen extends LinearLayout {
         final float textSize = config.getTextSize() > 0 ? config.getTextSize() : defaultTextSize;
         final float iconSize = textSize*config.getIconSize();
         final ImageView imageView = new ImageView(getContext());
-        imageView.setImageResource(config.getIconId());
+        imageView.setImageDrawable(config.getIcon());
         final LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams((int) iconSize, (int) iconSize);
         imageView.setLayoutParams(imageParams);
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

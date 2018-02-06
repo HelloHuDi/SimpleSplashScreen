@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context="com.hd.simplesplashscreen.demo.MainActivity">
 
-    <com.hd.splashscreen.SimpleSplashScreen
+    <com.hd.splashscreen.text.SimpleSplashScreen
         android:id="@+id/horizontalScreen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"/>
 
-    <com.hd.splashscreen.SimpleSplashScreen
+    <com.hd.splashscreen.text.SimpleSplashScreen
         android:id="@+id/verticalScreen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
