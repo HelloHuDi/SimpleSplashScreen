@@ -18,7 +18,7 @@ class MainActivity : BaseActivity(), SimpleSplashFinishCallback {
         verticalScreen.start()
     }
 
-    private fun getSimpleConfig(size: Float = 30f, needCallback: Boolean = false): SimpleConfig {
+    private fun getSimpleConfig(size: Float = 30f): SimpleConfig {
         val simpleConfig = SimpleConfig(this)
         simpleConfig.text = "SIMPLESPLASHSCREEN"
         simpleConfig.setTextColorFromResources(R.color.colorAccent)
@@ -26,7 +26,6 @@ class MainActivity : BaseActivity(), SimpleSplashFinishCallback {
         simpleConfig.setIconId(R.mipmap.ic_launcher)
         simpleConfig.iconDelayTime = 800
         simpleConfig.iconSize = 0.7f
-        if (needCallback)
             simpleConfig.callback = this
         return simpleConfig
     }
