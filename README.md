@@ -28,3 +28,24 @@ compile 'com.hd.splashscreen:splashscreen:1.4'
 ```
   horizontalScreen.start();
 ```
+
+## use about video:
+
+#### in xml:
+```
+ <com.hd.splashscreen.video.BackgroundVideoView
+        android:id="@+id/backgroundVideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+```
+
+#### code :
+
+```
+   //start:
+   backgroundVideo.setPlayRawId(R.raw.video1)
+   backgroundVideo.start()
+
+   //stop:
+   backgroundVideo.stop()
+```
